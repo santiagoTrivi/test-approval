@@ -21,6 +21,7 @@ jobs:
           secret: ${{ github.TOKEN }}
           approvers: santiagoTrivi 
           minimum-approvals: 1
+          fail-on-denial: false
           issue-title: "Manual Approval Required for pipeline Apply"
           issue-body: "Please approve or deny the deployment."
 
