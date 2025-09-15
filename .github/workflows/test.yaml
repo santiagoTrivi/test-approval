@@ -1,0 +1,27 @@
+on:
+    workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        run: echo "Setting up Python environment"
+
+      - name: Await Manual Approval
+        uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: santiagoTrivi 
+          minimum-approvals: 1
+          issue-title: "Manual Approval Required for pipeline Apply"
+          issue-body: "Please approve or deny the deployment."
+
+      - name: Install dependencies
+        run: echo "Installing dependencies"
+
+      
