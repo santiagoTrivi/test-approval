@@ -28,8 +28,8 @@ jobs:
           approvers: santiagoTrivi 
           minimum-approvals: 1
           fail-on-denial: false
-          issue-title: "🚀 Aprobar despliegue a producción ${{ inputs.environment }}"
-          issue-body: "Please approve or deny the deployment."
+          issue-title: "🚀 Aprobar despliegue a ${{ inputs.environment }}"
+          issue-body: "Please approve or deny the deployment to ${{ inputs.environment }}"
 
       - name: Install dependencies
         run: echo "Installing dependencies"
