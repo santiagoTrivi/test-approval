@@ -1,5 +1,11 @@
 on:
-    workflow_dispatch:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Selecciona el entorno'
+        required: true
+        type: choice
+        options: [development, qa, demo, uat, prod]
 
 permissions:
     id-token: write
@@ -22,7 +28,7 @@ jobs:
           approvers: santiagoTrivi 
           minimum-approvals: 1
           fail-on-denial: false
-          issue-title: "Manual Approval Required for pipeline Apply"
+          issue-title: "🚀 Aprobar despliegue a producción ${{ inputs.environment }}"
           issue-body: "Please approve or deny the deployment."
 
       - name: Install dependencies
