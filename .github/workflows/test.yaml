@@ -32,7 +32,6 @@ jobs:
       - name: Run flutterfire configure
         run: |
           dart pub global activate flutterfire_cli
-          cd app
           flutterfire configure --project=tutu-back-2 --platforms=android --yes
 
 
