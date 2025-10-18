@@ -25,10 +25,6 @@ jobs:
           GOOGLE_APPLICATION_CREDENTIALS: /tmp/firebase-key.json
         run: |
           echo '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}' > /tmp/firebase-key.json
-      
-      - name: Deploy to Firebase
-        run: |
-          firebase use --add --project tutu-back-2 --token "$(firebase auth:print-access-token)"
 
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
