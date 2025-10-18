@@ -17,21 +17,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+      
+      - name: Authenticate with Firebase using service account
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/firebase-key.json
+        run: |
+          echo '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}' > /tmp/firebase-key.json
+      
+      - name: Deploy to Firebase
+        run: |
+          firebase deploy --project tutu-back-2 --token "$(firebase auth:print-access-token)"
 
-      - name: Set up Python
-        run: echo "Setting up Python environment"
 
-      - name: Await Manual Approval
-        uses: trstringer/manual-approval@v1
-        with:
-          secret: ${{ github.TOKEN }}
-          approvers: santiagoTrivi 
-          minimum-approvals: 1
-          fail-on-denial: false
-          issue-title: "🚀 Aprobar despliegue a ${{ inputs.environment }}"
-          issue-body: "Please approve or deny the deployment to ${{ inputs.environment }}"
-
-      - name: Install dependencies
-        run: echo "Installing dependencies"
+      
 
       
