@@ -27,7 +27,6 @@ jobs:
           echo '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}' > /tmp/firebase-key.json
           gcloud auth activate-service-account --key-file=/tmp/firebase-key.json
           gcloud config set project tutu-back-2
-          firebase login:ci --no-localhost || true
       
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
