@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: production      # Ensure this matches your branch name
+          ref: main      # Ensure this matches your branch name
           fetch-depth: 0
 
       # 1. Calculate and push the new tag
@@ -35,7 +35,7 @@ jobs:
           tag_name: ${{ steps.tag_version.outputs.new_tag }} 
           name: ${{ steps.tag_version.outputs.new_tag }} 
           # Fix: Corrected 'productio' to 'production'
-          target_commitish: production 
+          target_commitish: main 
           # Fix: generate_release_notes handles the body automatically
           generate_release_notes: true 
         env:
