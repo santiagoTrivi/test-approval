@@ -1,9 +1,7 @@
 name: Auto Tag and Release
 
 on:
-  push:
-    branches:
-      - main # Or 'master' depending on your repo
+  workflow_dispatch:
 
 permissions:
   contents: write
