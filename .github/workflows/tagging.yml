@@ -22,6 +22,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
+          TAG_PREFIX: v
+          PRERELEASE: true
           DEFAULT_BUMP: patch # This ensures v2.0.59 becomes v2.0.60
 
       # 2. Generate the changelog based on the new tag
