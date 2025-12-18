@@ -1,4 +1,4 @@
-name: Auto Tag and Release
+name: Auto Tag and Release v2
 
 on:
   workflow_dispatch: # Allows manual trigger
