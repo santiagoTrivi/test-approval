@@ -22,9 +22,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
-          TAG_PREFIX: v
-          PRERELEASE: true
-          DEFAULT_BUMP: patch # This ensures v2.0.59 becomes v2.0.60
+          DEFAULT_BUMP: patch
+          # Ensure no custom prefix is added to the git tag itself
+          TAG_CONTEXT: repo
 
       # 2. Generate the changelog based on the new tag
       - name: Build Changelog
@@ -37,8 +37,10 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.tag_version.outputs.new_tag }}
-          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          # This is the 'ID' of the release
+          tag_name: ${{ steps.tag_version.outputs.new_tag }} 
+          # This is the 'Title' displayed on the Release page
+          name: ${{ steps.tag_version.outputs.new_tag }} 
           body: ${{ steps.github_release.outputs.changelog }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
