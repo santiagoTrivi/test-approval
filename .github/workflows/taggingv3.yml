@@ -1,0 +1,42 @@
+name: Auto Tag and Release v3
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: production      # Ensure this matches your branch name
+          fetch-depth: 0
+
+      # 1. Calculate and push the new tag
+      - name: Bump version and push tag
+        id: tag_version
+        uses: anothrNick/github-tag-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: patch
+          TAG_CONTEXT: repo
+          INITIAL_VERSION: 2.0.0 
+
+      # 2. Create the GitHub Release
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag_version.outputs.new_tag }} 
+          name: ${{ steps.tag_version.outputs.new_tag }} 
+          # Fix: Corrected 'productio' to 'production'
+          target_commitish: production 
+          # Fix: generate_release_notes handles the body automatically
+          generate_release_notes: true 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
