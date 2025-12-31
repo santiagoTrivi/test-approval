@@ -1,7 +1,7 @@
 name: Auto Tag and Release v2
 
 on:
-  workflow_dispatch: # Allows manual trigger
+  workflow_dispatch: 
 
 permissions:
   contents: write
@@ -13,8 +13,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: main        # Forces the action to use the main branch
-          fetch-depth: 0   # Required to see the history and find the last tag
+          ref: main       
+          fetch-depth: 0 
 
       # 1. Calculate and push the new tag (e.g., v2.0.59 -> v2.0.60)
       - name: Bump version and push tag
